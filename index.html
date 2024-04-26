@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italian Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+nav {
+    background-color: #ccc;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+section {
+    margin: 2em;
+}
+
+button {
+    background-color: #333;
+    border: none;
+    color: #fff;
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+#cart {
+    display: none;
+}
+</style>
+<body>
+    <header>
+        <h1>Welcome to Our Italian Restaurant</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <ul>
+            <li>
+                <h3>Pizza</h3>
+                <p>Margherita, Pepperoni, Veggie</p>
+                <button onclick="addToCart('Pizza')">Add to Cart</button>
+            </li>
+            <li>
+                <h3>Pasta</h3>
+                <p>Spaghetti Bolognese, Fettuccine Alfredo, Lasagna</p>
+                <button onclick="addToCart('Pasta')">Add to Cart</button>
+            </li>
+            <li>
+                <h3>Salad</h3>
+                <p>Caesar, Greek, Caprese</p>
+                <button onclick="addToCart('Salad')">Add to Cart</button>
+            </li>
+        </ul>
+    </section>
+    <section id="cart">
+        <h2>Cart</h2>
+        <ul id="cartItems"></ul>
+        <button onclick="checkout()">Checkout</button>
+    </section>
+    <script src="script.js"></script>
+</body>
+<script>
+let cart = [];
+
+function addToCart(item) {
+    cart.push(item);
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById("cartItems");
+    cartItems.innerHTML = "";
+    for (let i = 0; i < cart.length; i++) {
+        const li = document.createElement("li");
+        li.textContent = cart[i];
+        cartItems.appendChild(li);
+    }
+    if (cart.length > 0) {
+        document.getElementById("cart").style.display = "block";
+    } else {
+        document.getElementById("cart").style.display = "none";
+    }
+}
+
+function checkout() {
+    alert("Thank you for your order! Your total is $" + (cart.length * 10));
+    cart = [];
+    updateCart();
+}
+</script>
+</html>
